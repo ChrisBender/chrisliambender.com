@@ -32,7 +32,7 @@ ul.nobullet {
   font-size: 18px;
 }
 
-@media (max-width: 978px) {
+@media (max-width: 760px) {
     body {
       width: auto;
       padding: 10px;
