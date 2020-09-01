@@ -20,6 +20,12 @@ img {
   width: 200px;
 }
 
+.hidden {
+  display: none;
+}
+.visible {
+}
+
 ul.nobullet {
   list-style-type: none;
   margin: 0;

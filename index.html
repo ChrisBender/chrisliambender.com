@@ -13,13 +13,20 @@
       gtag('js', new Date());
       gtag('config', 'UA-175522370-1');
     </script>
+    <script>
+      function upgradeImage(object) {
+        object.className = "visible";
+        document.getElementById("img_lowres").className = "hidden";
+      }
+    </script>
   </head>
   <body>
     <h1>
       Christopher Bender
     </h1>
     <div>
-      <img src="images/picture.jpg"> 
+      <img id="img_lowres" src="images/picture-lowresolution.jpg" class="visible">
+      <img id="img_highres" src="images/picture.jpg" class="hidden", onload="upgradeImage(this);">
       <p>
         I'm a UC Berkeley undergraduate studying pure math and computer science.
       </p>
