@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <title>Chris Bender</title>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175522370-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-175522370-1');
+    </script>
+  </head>
+  <body>
+    <h1>Bias-Variance Tradeoff in Everything</h1>
+    <div class="post">
+    <p>
+The bias-variance tradeoff says that, when choosing which machine
+learning algorithm to use, there is a tradeoff between two desirable
+properties: 1) Become more accurate as you add more data, and 2) Produce
+similar models when you feed the algorithm slightly different data
+points (i.e., don't overfit to the particular samples that you've given
+the model). For example, linear regression falls on the "high bias and
+low variance" side of the tradeoff: It cannot capture nonlinear
+relationships, but it is very robust to the particular data points that
+you feed it. In contrast, many modern deep neural networks fall on the
+"low bias and high variance" side: They are very flexible in the types
+of relationships that they can capture and hence tend to improve with
+more data, but they are prone to overfitting.
+    </p>
+
+    <p>
+Since modern neural networks overfit so easily, lots of tricks are used
+to reduce the variance (and thereby tend to increase the bias): Weight
+decay explicitly encourages small weights, dropout reduces the ability
+of the network to overfit to some small subset of the inputs, and better
+architecture design (e.g., using a CNN instead of a fully-connected
+network) creates an "inductive bias" against certain types of functions.
+    </p>
+
+    <p>
+This core idea of "increasing average cost in exchange for a decrease in
+the variance" can be useful for understanding lots of other behaviors
+that are counterintuitive on the surface:
+    </p>
+
+    <p>
+<b>Insurance</b>: In order for an insurance company to be profitable, they
+need to make money on average. If the insurance company is making money
+on average, then the customer must be losing money on average: Why do we
+still find it worthwhile to accept a losing deal? What gives?
+    </p>
+
+    <p>
+We accept such a deal because it decreases the variance of our outcomes;
+instead of risking a large negative outcome (e.g., paying entirely for a
+car crash), we can hedge our risk with a fixed monthly payment.
+    </p>
+
+    <p>
+<b>Bitcoin Mining Pools</b>: Transactions on the blockchain are validated by
+a large pool of computers, each of which works to solve a hard
+computational problem (in particular, finding an integer that, when
+concatenated with the new state of the blockchain, has a hash that
+contains a certain number of leading zeroes). When an individual
+computer in the pool solves the problem, they are rewarded with Bitcoin.
+    </p>
+
+    <p>
+Oftentimes, individual miners will aggregate their compute resources
+together, splitting the mined Bitcoin in proportion to the amount of
+compute that each person contributes. Of course, the mining pool
+infrastructure (to tally compute effort, do the splitting of rewards,
+etc.) costs money, so the pool organizer takes a percentage of all
+revenue from the pool. Once again, if the pool organizer makes money on
+average, then the miners must be losing money on average. We again have
+the bias-variance tradeoff: Miners exchange a percentage of their
+average profits for a more consistent stream of revenue.
+    </p>
+
+    <p>
+<b>Futures</b>: A future is a financial contract that obligates a buyer and a
+seller to transact at a future date, for some agreed-upon good at an
+agreed-upon price. (In contrast to more-commonly-known options, where
+one party merely has the <i>option</i> of executing the deal).
+    </p>
+
+    <p>
+Contracting for future transactions allows for producers to hedge
+against risk: If the value of orange juice concentrate is expected to be
+$1.30 per pound in six months, orange growers can guarantee this revenue
+by purchasing a futures contract at $1.25 per pound. This loses the
+orange growers money on average, but takes the variance to zero.
+    </p>
+
+    <p>
+<b>Startup Acquisitions</b>: Most acquisitions fail. Quantitatively defining
+and estimating failure is difficult, but some studies suggest between 70
+and 90 percent https://hbr.org/2011/03/the-big-idea-the-new-ma-playbook
+failure rates. Shouldn't businesses be more diligent about what
+companies they acquire? Isn't profit maximization the name of the game
+for corporations?
+    </p>
+
+    <p>
+One explanation of this seemingly-irrational behavior of corporations is
+that the incentives of the executives are not perfectly aligned with the
+incentives of the corporation itself: CEOs can be praised for
+"reasonable" behavior that doesn't necessarily work out, and might be
+ridiculed for more erratic moves that would actually maximize profits
+(e.g., Zuckerberg acquiring Instagram without explicit
+discussion/approval from other board members).
+    </p>
+
+    <p>
+However, it can also be rational for a corporation to pursue a losing
+bet, so long as it reduces variance: By purchasing a
+potentially-competitive startup, the corporation is paying a fee for
+reduced risk of total elimination.
+    </p>
+
+    <p>
+<b>Equity Premium</b>: Over the past century, the S&P 500 has grown ~10% per
+year on average, whereas government bonds have returned ~5% per year.
+Since equities (i.e., stocks) have such a higher return than bonds, why
+would anyone invest in bonds? The answer is the "equity premium", the
+idea that since stocks have such a higher variance than bonds,
+risk-averse investors (retirees, pension funds, etc.) will prefer a
+reduction in variance in exchange for a lower return.
+    </p>
+
+    <p align="center">
+* * *
+    </p>
+
+    <p>
+Returning to the core idea behind these behaviors, why do there seem to
+be so many situations in which we do not maximize expected return?
+Fundamentally, all these risk-reduction strategies are rational due to
+the distinction between <i>monetary utility</i> and <i>money itself</i>.
+    </p>
+
+    <p>
+The idea of "monetary utility" refers to how much real value we can get
+out of a dollar. Though it increases as we have more dollars (you are
+never sad about an additional dollar), the <i>rate of increase will
+decrease</i> (i.e., it is a concave function). We would be much happier if
+our yearly salary increased from $30k to $31k, versus from $500k to
+$501k, though both are increases of a thousand dollars. This is because
+we tend to spend our money on our most important purchases first (food,
+rent, etc.).
+    </p>
+
+    <p>
+So, instead of maximizing our dollar amount, both individuals and
+companies are maximizing monetary utility. Of course, monetary utility
+is monotonic with respect to money, but the distinction between money
+and monetary utility matters when reasoning under uncertainty. Suppose
+you are offered either 1) A guaranteed 1000 dollars (which gives, say, 3
+monetary utility points) or 2) A 50/50 chance of 10,000 dollars (4
+utility points) or 10 dollars (1 utility point). Option 2 maximizes
+expected money, but option 1 maximizes expected monetary utility.
+    </p>
+
+    <p>
+If we have "reduced variance for the price of a reduced mean" behavior
+with concave utility functions, what do we expect with convex utility
+functions? Increasing marginal utility is much less common than
+decreasing marginal utility, but we can oftentimes find increasing
+marginal utility in situations where we <i>relieve unhappiness</i> (rather
+than gaining more happiness): Debt, looking for a cure to a physical
+illness or negative emotional state, etc. For example, the difference
+between a small amount of chronic pain and no chronic pain provides much
+more utility than the difference between a large amount of chronic pain
+and slightly less pain.
+    </p>
+
+    <p>
+In these convex utility situations, we actually expect "<i>increased</i>
+variance for the price of reduced mean" behavior. Seemingly-irrational
+behavior that makes the average outcome worse while increasing the
+variance of outcomes can surprisingly be utility-maximizing behavior.
+    </p>
+
+    <p>
+In all, the shift in view from dollar amounts to monetary utility is a
+reminder that transactions are positive-sum: Everyone has a slightly
+different utility function, and mutually-beneficial transactions (and
+hence, progress of society in general) is only possible through these
+utility differences.
+    </p>
+    </div>
+  </body>
+</html>
+

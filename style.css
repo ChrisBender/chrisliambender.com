@@ -33,6 +33,10 @@ ul.nobullet {
   padding-bottom: 10px;
 }
 
+div.post {
+  padding-right: 15%;
+}
+
 .links {
   clear: both;
   padding-top: 20px;
