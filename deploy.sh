@@ -3,6 +3,7 @@ aws s3 sync . s3://chrisliambender.com \
   --exclude "*.sw[a-p]" \
   --exclude ".git/*" \
   --exclude ".gitignore" \
-  --exclude "deploy.sh"
-aws cloudfront create-invalidation --distribution-id EZN1MUG7TXYKS --paths "/*"
-aws cloudfront create-invalidation --distribution-id EJM2EWXU3SUSP --paths "/*"
+  --exclude "deploy.sh" \
+  --profile personal
+aws cloudfront create-invalidation --distribution-id EZN1MUG7TXYKS --paths "/*" --profile personal
+aws cloudfront create-invalidation --distribution-id EJM2EWXU3SUSP --paths "/*" --profile personal
